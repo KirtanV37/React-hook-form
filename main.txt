@@ -1,0 +1,264 @@
+Object
+age
+:
+12
+confirmPassword
+:
+"111111"
+country
+:
+"ind"
+email
+:
+"kirtanv.itpath@gmail.com"
+gender
+:
+"male"
+name
+:
+"Kirtan Vyas"
+password
+:
+"111111"
+profilePic
+:
+"404.png"
+skills
+:
+(4)['React', 'Vue', 'Angular', 'Node']
+terms
+:
+true
+
+// import { useForm } from "react-hook-form";
+// import * as yup from "yup";
+// import { yupResolver } from "@hookform/resolvers/yup";
+
+// const FormOne = () => {
+//     const schema = yup.object({
+//         name: yup.string().required("name is required"),
+
+//         email: yup.string().email("Invalid email").required("email is required"),
+
+//         // age: yup.string().positive().integer().required('age is reuired'),
+
+//         age: yup
+//             .number()
+//             .typeError("Age must be a number")
+//             .positive("Age must be positive")
+//             .integer("Age must be an integer")
+//             .required("Age is required"),
+
+//         gender: yup.string().required("gender is required"),
+
+//         password: yup
+//             .string()
+//             .min(6, "Password must be atleast 6 characters")
+//             .required("Password is required"),
+
+//         confirmPassword: yup
+//             .string()
+//             .oneOf([yup.ref("password")], "Password must match")
+//             .required("Please confirm your password"),
+
+//         country: yup.string().required("Country is required"),
+
+//         terms: yup.boolean().oneOf([true], "You must accept the terms"),
+
+//         profilePic: yup
+//             .mixed()
+//             .test(
+//                 "required",
+//                 "Profile picture is required",
+//                 (value) => value && value.length > 0
+//             )
+//             .test(
+//                 "fileSize",
+//                 "File too large",
+//                 (value) => !value || (value[0] && value[0].size <= 1024 * 1024)
+//             ), // 1MB limit
+
+//         /* skills: yup.string().required('Skill is required')*/
+
+//         skills: yup
+//             .array()
+//             .min(1, "Select at least one skill")
+//             .required("Skill is required"),
+//     });
+
+//     const {
+//         handleSubmit,
+//         formState: {
+//             errors,
+//             isSubmitSuccessful,
+//             isSubmitted,
+//             isSubmitting,
+//             isValid,
+//         },
+//         register,
+//         reset,
+//     } = useForm({
+//         resolver: yupResolver(schema),
+//         mode: "all",
+//         defaultValues: {
+//             gender: "male",
+//             country: "ind",
+//             skills: ["Vue", "Node"],
+//         },
+//     });
+
+//     /*
+//           const onSubmit = async (data) => {
+//               // Simulate async operation
+//               return new Promise((resolve) => {
+//                   setTimeout(() => {
+//                       data.createdOn = new Date();
+//                       console.log("Submitted Data:", data);
+//                       resolve();
+//                       reset();
+//                   }, 2000);
+//               });
+//           };
+//           */
+
+//     const onSubmit = (data) => {
+//         const formattedData = {
+//             ...data,
+//             profilePic: data.profilePic[0]?.name,
+//         };
+//         console.log("Form Data:", formattedData);
+//         reset();
+//     };
+
+//     return (
+//         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+//             <div>
+//                 <label>
+//                     Name:
+//                     <input placeholder="Name" {...register("name")} />
+//                 </label>
+//                 {errors.name && <p style={{ color: "red" }}>{errors.name.message}</p>}
+//             </div>
+
+//             <div>
+//                 <label>
+//                     Age:
+//                     <input placeholder="Age" {...register("age")} type="number" />
+//                 </label>
+//                 {errors.age && <p style={{ color: "red" }}>{errors.age.message}</p>}
+//             </div>
+
+//             <div>
+//                 <label>
+//                     Email:
+//                     <input placeholder="email" {...register("email")} type="email" />
+//                 </label>
+//                 {errors.email && <p style={{ color: "red" }}>{errors.email.message}</p>}
+//             </div>
+
+//             <div>
+//                 <label>
+//                     Password:
+//                     <input
+//                         placeholder="password"
+//                         type="password"
+//                         {...register("password")}
+//                     />
+//                 </label>
+//                 {errors.password && (
+//                     <p style={{ color: "red" }}>{errors.password.message}</p>
+//                 )}
+//             </div>
+
+//             <div>
+//                 <label>
+//                     Confirm Password:
+//                     <input
+//                         placeholder="confirm password"
+//                         {...register("confirmPassword")}
+//                         type="password"
+//                     />
+//                 </label>
+//                 {errors.confirmPassword && (
+//                     <p style={{ color: "red" }}>{errors.confirmPassword.message}</p>
+//                 )}
+//             </div>
+
+//             <div>
+//                 <label>
+//                     <input type="radio" value="male" {...register("gender")} /> Male
+//                 </label>
+//                 <label>
+//                     <input type="radio" value="female" {...register("gender")} /> Female
+//                 </label>
+//                 {errors.gender && (
+//                     <p style={{ color: "red" }}>{errors.gender.message}</p>
+//                 )}
+//             </div>
+
+//             <div>
+//                 <label>
+//                     Select Country:
+//                     <select {...register("country")}>
+//                         <option value="">Select Country</option>
+//                         <option value="ind">IND</option>
+//                         <option value="usa">USA</option>
+//                         <option value="uk">UK</option>
+//                     </select>
+//                 </label>
+//                 {errors.country && (
+//                     <p style={{ color: "red" }}>{errors.country.message}</p>
+//                 )}
+//             </div>
+
+//             <div>
+//                 Skills:
+//                 <label>
+//                     <input type="checkbox" value="React" {...register("skills")} />
+//                     React
+//                 </label>
+//                 <label>
+//                     <input type="checkbox" value="Vue" {...register("skills")} />
+//                     Vue
+//                 </label>
+//                 <label>
+//                     <input type="checkbox" value="Angular" {...register("skills")} />
+//                     Angular
+//                 </label>
+//                 <label>
+//                     <input type="checkbox" value="Node" {...register("skills")} />
+//                     Node
+//                 </label>
+//                 {errors.skills && (
+//                     <p style={{ color: "red" }}>{errors.skills.message}</p>
+//                 )}
+//             </div>
+
+//             <div>
+//                 <input type="file" {...register("profilePic")} />
+//                 {errors.profilePic && (
+//                     <p style={{ color: "red" }}>{errors.profilePic.message}</p>
+//                 )}
+//             </div>
+
+//             <div>
+//                 <label>
+//                     <input type="checkbox" {...register("terms")} />
+//                     Accept Terms and Conditions
+//                 </label>
+//                 {errors.terms && <p style={{ color: "red" }}>{errors.terms.message}</p>}
+//             </div>
+
+//             <button type="submit" disabled={!isValid || isSubmitting}>
+//                 {isSubmitting ? "Submitting..." : "Submit"}
+//             </button>
+
+//             {isSubmitted && <p className="text-yellow-600">Form was submitted.</p>}
+//             {isSubmitSuccessful && (
+//                 <p className="text-green-600">Submit was successful!</p>
+//             )}
+//         </form>
+//     );
+// };
+
+// export default FormOne;
